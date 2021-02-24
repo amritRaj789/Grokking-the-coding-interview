@@ -181,3 +181,37 @@ const find_string_anagrams = function(str, pattern) {
   }
   return result;
 };
+
+// Problem Challenge 3
+
+const find_substring = function(str, pattern) {
+  let result = "";
+  let minLength = +Infinity;
+  let hash = {};
+  for(let char of pattern){
+    if(!(char in hash))
+      hash[char] = 0;
+    hash[char]++;
+  }
+  let matched = Object.keys(hash).length;
+  let start = 0;
+  for(let end = 0; end < str.length; end++){
+    if(str[end] in hash)
+      hash[str[end]]--;
+    if(hash[str[end]] === 0)
+      matched--;
+    while(matched === 0){
+      if(minLength > end-start+1){
+        minLength = end-start+1;
+        result = str.slice(start, end+1);
+      }
+      if(str[start] in hash){
+        hash[str[start]]++;
+        if(hash[str[start]] === 1)
+          matched++;
+      }
+      start++;
+    }
+  }
+  return result;
+}
