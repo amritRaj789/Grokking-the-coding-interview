@@ -44,3 +44,22 @@ const longest_substring_with_k_distinct = function(str, k) {
     return maxLength;
 
 };
+
+const fruits_into_baskets = function(fruits) {
+  let hash = {};
+  let maxFruits = 0;
+  let start = 0;
+  for(let end = 0; end < fruits.length; end++){
+    if(!(fruits[end] in hash))
+      hash[fruits[end]] = 0;
+    hash[fruits[end]]++;
+    while(Object.keys(hash).length > 2){
+      hash[fruits[start]]--;
+      if(hash[fruits[start]] === 0)
+        delete hash[fruits[start]];
+      start++;
+    }
+    maxFruits = Math.max(maxFruits, end-start+1);
+  }
+  return maxFruits;
+};
