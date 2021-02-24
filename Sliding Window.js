@@ -150,3 +150,34 @@ const find_permutation = function(str, pattern) {
   }
   return false;
 };
+
+//Problem Challenge 2
+
+const find_string_anagrams = function(str, pattern) {
+  let result = [];
+  let hash1 = {};
+  let start = 0;
+  for(let char of pattern){
+    if(!(char in hash1))
+      hash1[char] = 0;
+    hash1[char]++;
+  }
+  let charToBeMatched = Object.keys(hash1).length;
+  for(let i = 0; i < str.length; i++){
+    if(str[i] in hash1)
+      hash1[str[i]]--;
+    if(hash1[str[i]] === 0)
+      charToBeMatched--;
+    if(i >= pattern.length){
+      if(str[start] in hash1){
+        hash1[str[start]]++;
+        if(hash1[str[start]] === 1)
+          charToBeMatched++;
+      }
+      start++;
+    }
+    if(charToBeMatched === 0)
+      result.push(start);
+  }
+  return result;
+};
