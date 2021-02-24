@@ -121,3 +121,32 @@ const length_of_longest_substring = function(arr, k) {
   }
   return maxLength;
 };
+
+//Problem Challenge 1
+const find_permutation = function(str, pattern) {
+  let hash1 = {};
+  for(let char of pattern){
+    if(!(char in hash1))
+      hash1[char] = 0;
+    hash1[char]++;
+  }
+  let charMatched = Object.keys(hash1).length;
+  let start = 0;
+  for(let i = 0; i < str.length; i++){
+    if(str[i] in hash1)
+      hash1[str[i]]--;
+    if(hash1[str[i]] === 0)
+      charMatched--;
+    if(i >= pattern.length){
+      if(str[start] in hash1){
+        hash1[str[start]]++;
+        if(hash1[str[start]] === 1)
+          charMatched++;
+      }
+          start++;
+    }
+    if(charMatched === 0)
+      return true;
+  }
+  return false;
+};
