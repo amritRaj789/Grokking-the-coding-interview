@@ -79,3 +79,30 @@ const non_repeat_substring = function(str) {
   }
   return maxLength;
 };
+
+
+const length_of_longest_substring = function(str, k) {
+  let hash = {};
+  let start = 0;
+  let maxRepeatingChar = str[0];
+  let maxRepeatingCharCount = 1;
+  let maxLength = -Infinity;
+  for(let end = 0; end < str.length; end++){
+    if(!(str[end] in hash))
+      hash[str[end]] = 0;
+    hash[str[end]]++;
+    if(hash[str[end]] > maxRepeatingCharCount){
+      maxRepeatingChar = str[end];
+      maxRepeatingCharCount = hash[str[end]];
+    }
+    while(end-start + 1 - maxRepeatingCharCount  > k){
+      hash[str[start]]--;
+      if(hash[str[start]] === 0)
+        delete hash[str[start]];
+      start++;
+    }
+    maxLength = Math.max(maxLength, end-start+1);
+  }
+
+  return maxLength;
+};
