@@ -1,5 +1,7 @@
-// Preconditions: Sorted array or linkedlist
-// objective: find a set of elements that aren't contiguous fulfilling certain constraints
+// SLIDING WINDOW
+// Preconditions: usually unsorted arrays
+//        some contiguous part of array has to be returned
+// Objective: finding a contiguous part of the array that meets some criteria
 
 const smallest_subarray_with_given_sum = function(s, arr) {
   let minLength = +Infinity;
@@ -211,6 +213,39 @@ const find_substring = function(str, pattern) {
           matched++;
       }
       start++;
+    }
+  }
+  return result;
+}
+
+// Problem Challenge 4
+const find_word_concatenation = function(str, words) {
+  let wordMap = {};
+  words.forEach( word => {
+    if(!(word in wordMap))
+      wordMap[word] = 0;
+    wordMap[word]++;
+  })
+  wordCount = words.length;
+  wordLength = words[0].length;
+  let result = [];
+  for(let i = 0; i < (str.length - wordCount*wordLength + 1); i++){
+    let wordsSeen = {};
+    for(j = 0; j < wordCount; j++){
+      let word = str.substr(i + j*wordLength, wordLength);
+      if(!(word in wordMap))
+        break;
+      if(!(word in wordsSeen))
+        wordsSeen[word] = 0;
+      wordsSeen[word]++;
+      if(wordsSeen[word] > wordMap[word]){
+        break;
+        i += wordLength-1;
+      }
+      if(j+1 === wordCount){
+        result.push(i);
+        i += wordLength-1;
+      }
     }
   }
   return result;
