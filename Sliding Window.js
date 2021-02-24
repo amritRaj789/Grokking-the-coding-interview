@@ -106,3 +106,18 @@ const length_of_longest_substring = function(str, k) {
 
   return maxLength;
 };
+
+const length_of_longest_substring = function(arr, k) {
+  let hash = [0, 0];
+  let start = 0;
+  let maxLength = 0;
+  for(let end = 0; end < arr.length; end++){
+    hash[arr[end]]++;
+    while(hash[0] > k){
+      hash[arr[start]]--;
+      start++;
+    }
+    maxLength = Math.max(maxLength, end - start + 1);
+  }
+  return maxLength;
+};
