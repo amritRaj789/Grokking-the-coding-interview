@@ -63,3 +63,19 @@ const fruits_into_baskets = function(fruits) {
   }
   return maxFruits;
 };
+
+const non_repeat_substring = function(str) {
+  let charFreq = {};
+  let start = 0;
+  let maxLength = -Infinity;
+  for(let end = 0; end < str.length; end++){
+    if(!(str[end] in charFreq))
+      charFreq[str[end]] = end;
+    else{
+      start = charFreq[str[end]]+1;
+      charFreq[str[end]] = end;
+    }
+    maxLength = Math.max(maxLength, end-start+1);
+  }
+  return maxLength;
+};
