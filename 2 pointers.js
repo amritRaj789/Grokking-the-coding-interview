@@ -29,3 +29,22 @@ const remove_duplicates = function(arr) {
   }
   return i+1;
 };
+
+//Squaring a sorted Array
+const make_squares = function(arr) {
+  let result = new Array(arr.length);
+  let i = arr.length-1;
+  let left = 0;
+  let right = arr.length-1;
+  while(left <= right){
+  	if(Math.abs(arr[right]) >= Math.abs(arr[left])){
+  		result[i--] = arr[right]*arr[right];
+  		right--;
+  	}
+  	else{
+  		result[i--] = arr[left]*arr[left];
+  		left++;
+  	}
+  }
+  return result;
+};
