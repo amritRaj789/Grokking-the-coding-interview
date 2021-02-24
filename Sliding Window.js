@@ -17,3 +17,30 @@ const smallest_subarray_with_given_sum = function(s, arr) {
   	return 0;
   	return minLength;
 };
+
+const longest_substring_with_k_distinct = function(str, k) {
+  const hash = {};
+  let maxLength = -Infinity;
+  let start = 0;
+  let uniqueCharInHash = 0;
+
+  for(let end = 0; end < str.length; end++){
+      if(!(str[end] in hash)){
+        hash[str[end]] = 0;
+      }
+      hash[str[end]]++;
+      if(hash[str[end]] === 1)
+        uniqueCharInHash++;
+      while(uniqueCharInHash > k){
+        hash[str[start]]--;
+        if(hash[str[start]] === 0)
+          uniqueCharInHash--;
+        start++;
+      }
+      if(uniqueCharInHash === k){
+        maxLength = Math.max(maxLength, end-start+1);
+      }
+    }
+    return maxLength;
+
+};
