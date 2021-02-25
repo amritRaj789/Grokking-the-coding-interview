@@ -138,3 +138,60 @@ const dutch_flag_sort = function(arr) {
 		}
 	}
 };
+
+// Problem Challenge 1
+const search_quadruplets = function(arr, target) {
+  let quadruplets = [];
+  arr.sort((a, b) => a-b);
+  for(let i = 0; i < arr.length-3; i++){
+  	if(i > 1 && arr[i] === arr[i-1])
+  		continue;
+  	for(let j = i+1; j < arr.length-2; j++){
+  		if(j > i+2 && arr[j] === arr[j-1])
+  			continue;
+  		let left = j+1; 
+  		let right = arr.length-1;
+  		while(left < right){
+  			sum = arr[i] + arr[j] + arr[left] + arr[right];
+  			if(sum < target)
+  				left++;
+  			else if(sum > target)
+  				right--;
+  			else{
+  				quadruplets.push([arr[i], arr[j], arr[left], arr[right]]);
+  				left++;
+  				right--;
+  			}
+  		}
+  	}
+  }
+  return quadruplets;
+};
+
+
+//Problem Challenge 2
+// Comparing Strings containing Backspaces (medium)
+
+const backspace_compare = function(str1, str2) {
+   let stringA = "";
+   let stringB = "";
+   for(let char of str1){
+   		if(char !== "#")
+   			stringA = stringA.concat(char);
+   		else{
+   			stringA = stringA.slice(0, stringA.length-1);
+   		}
+   }
+   for(let char of str2){
+   		if(char !== "#")
+   			stringB = stringB.concat(char);
+   		else{
+   			stringB = stringB.slice(0, stringB.length-1);
+   		}
+   }
+   console.log("A : ", stringA);
+   console.log("B : ", stringB);
+   return (stringA === stringB)
+};
+console.log(backspace_compare("xy#z", "xyz#"))
+
