@@ -93,3 +93,31 @@ const triplet_with_smaller_sum = function(arr, target) {
   }
   return count;
 };
+
+//Subarrays with Product Less than a Target
+red red red red red red red red red red red red
+
+// IMportant thing I learned while solving this problem was about arrays. WHen we Push some array to another, we are passing by reference
+// Use parentArray.push(array.slice(0)) or parentArray.push(array.concat()) to pass it by value
+
+const find_subarrays = function(arr, target) {
+	let result = [];
+	for(let i = 1; i <= arr.length; i++){
+		let array = [];
+		let product = 1;
+		let left = 0;
+		for(let j = 0; j < arr.length; j++){
+			array.push(arr[j]);
+			product *= arr[j];
+			if(j >= i-1){
+				if(product < target){
+					result.push(array.concat());
+				}
+				array.shift();
+				product = product/arr[left];
+				left++;
+			}
+		}
+	}
+	return result;
+}
