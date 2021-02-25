@@ -73,3 +73,23 @@ const triplet_sum_close_to_target = function(arr, target_sum) {
   }
   return closestSum;
 };
+
+//Triplets with Smaller Sum
+const triplet_with_smaller_sum = function(arr, target) {
+  let count = 0;
+  arr.sort((a, b) => a-b);
+  for(let i = 0; i < arr.length-2; i++){
+  	let left = i + 1;
+  	let right = arr.length-1;
+  	while(left < right){
+  		if(arr[i] + arr[left] + arr[right] >= target){
+  			right--;
+  		}
+  		else{
+  			count += right-left;
+  			left++;
+  		}
+  	}
+  }
+  return count;
+};
