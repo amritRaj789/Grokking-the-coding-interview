@@ -126,11 +126,10 @@ const find_subarrays = function(arr, target) {
 const dutch_flag_sort = function(arr) {
 	let left = 0;
 	let right = arr.length-1;
-	for(let i = 0; i < arr.length; i++){
-		if(arr[i] === 0 && i>left){
+	for(let i = 0; i <= right; i++){
+		if(arr[i] === 0){
 			[arr[i], arr[left]] = [arr[left], arr[i]];
 			left++;
-			i--;
 		}
 		else if(arr[i] === 2 && i<right){
 			[arr[i], arr[right]] = [arr[right], arr[i]];
