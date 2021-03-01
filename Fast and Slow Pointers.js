@@ -17,3 +17,40 @@ const has_cycle = function(head) {
 	}
 	return false;
 }
+
+red red red red red red red red
+// Start of Linked List Cycle
+const find_cycle_start = function(head){
+	let length = find_cycle_length(head);
+	let p1 = head;
+	let p2 = head;
+	while(length > 0){
+		p2 = p2.next;
+		length--;
+	}
+	while(p1 !== p2){
+		p1 = p1.next;
+		p2 = p2.next;
+	}
+	return p1;
+};
+// helper function
+function find_cycle_length (head){
+	let fast = head;
+	let slow = head;
+	while(fast !== null && fast.next !== null){
+		fast = fast.next.next;
+		slow = slow.next;
+		if(fast === slow)
+			break;
+	}
+	let current = slow;
+	let k = 0;
+	while(true){
+		current = current.next;
+		k++;
+		if(current === slow)
+			break;
+	}
+	return k;
+}
