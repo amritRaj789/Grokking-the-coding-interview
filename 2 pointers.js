@@ -195,3 +195,42 @@ const backspace_compare = function(str1, str2) {
 };
 console.log(backspace_compare("xy#z", "xyz#"))
 
+//Problem Challenge 3
+const shortest_window_sort = function(arr) {
+	let array = [...arr];
+	arr.sort((a,b) => a-b);
+	let left = 0;
+	let right = array.length-1;
+	while(left <= right){
+		if(arr[left] === array[left])
+			left++;
+		if(arr[right] === array[right])
+			right++;
+		if(arr[right] !== array[right] && arr[left] !== array[left])
+			break;
+	}
+	if(left > right)
+		return 0
+	else
+		return (right - left + 1)
+};
+
+const shortest_window_sort = function(arr) {
+	let array = [...arr];
+	arr.sort((a,b) => a-b);
+	let left = 0;
+	let right = array.length-1;
+	while(left <= right){
+		if(arr[left] === array[left])
+			left++;
+		if(arr[right] === array[right])
+			right++;
+		if(arr[right] !== array[right] && arr[left] !== array[left])
+			break;
+	}
+	if(left > right)
+		return 0
+	else
+		return (right - left + 1)
+};
+//Incomplete
