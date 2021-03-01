@@ -196,41 +196,66 @@ const backspace_compare = function(str1, str2) {
 console.log(backspace_compare("xy#z", "xyz#"))
 
 //Problem Challenge 3
+//Given an array, find the length of the smallest subarray in it which when sorted will sort the whole array.
 const shortest_window_sort = function(arr) {
 	let array = [...arr];
 	arr.sort((a,b) => a-b);
 	let left = 0;
-	let right = array.length-1;
-	while(left <= right){
-		if(arr[left] === array[left])
-			left++;
-		if(arr[right] === array[right])
-			right++;
-		if(arr[right] !== array[right] && arr[left] !== array[left])
+	while( left < array.length){
+		if(arr[left] !== array[left])
 			break;
+		left++;
 	}
-	if(left > right)
-		return 0
-	else
-		return (right - left + 1)
-};
+	if(left === array.length)
+		return 0;
+	let right = array.length-1;
 
-const shortest_window_sort = function(arr) {
-	let array = [...arr];
-	arr.sort((a,b) => a-b);
-	let left = 0;
-	let right = array.length-1;
-	while(left <= right){
-		if(arr[left] === array[left])
-			left++;
-		if(arr[right] === array[right])
-			right++;
-		if(arr[right] !== array[right] && arr[left] !== array[left])
+	while(left < right){
+		if(arr[right] !== array[right])
 			break;
+		right--;
+		
 	}
-	if(left > right)
-		return 0
-	else
 		return (right - left + 1)
 };
 //Incomplete
+// The above method has O(NlogN) but we can do better than this
+
+red red red red red red red red red red
+
+function shortest_window_sort(arr) {
+  let low = 0,
+    high = arr.length - 1;
+  // find the first number out of sorting order from the beginning
+  while ((low < arr.length - 1 && arr[low] <= arr[low + 1])) {
+    low += 1;
+  }
+
+  if (low === arr.length - 1) { // if the array is sorted
+    return 0;
+  }
+
+  // find the first number out of sorting order from the end
+  while (high > 0 && arr[high] >= arr[high - 1]) {
+    high -= 1;
+  }
+
+  // find the maximum and minimum of the subarray
+  let subarrayMax = -Infinity,
+    subarrayMin = Infinity;
+  for (k = low; k < high + 1; k++) {
+    subarrayMax = Math.max(subarrayMax, arr[k]);
+    subarrayMin = Math.min(subarrayMin, arr[k]);
+  }
+
+  // extend the subarray to include any number which is bigger than the minimum of the subarray
+  while (low > 0 && arr[low - 1] > subarrayMin) {
+    low -= 1;
+  }
+  // extend the subarray to include any number which is smaller than the maximum of the subarray
+  while (high < arr.length - 1 && arr[high + 1] < subarrayMax) {
+    high += 1;
+  }
+
+  return high - low + 1;
+}
