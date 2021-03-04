@@ -79,3 +79,15 @@ function findSquare (num){
 	}
 	return sum;
 }
+
+
+//Middle of the LinkedList (easy)
+const find_middle_of_linked_list = function(head) {
+  let fast = head;
+  let slow = head;
+  while(fast !== null && fast.next !== null){
+  	fast = fast.next.next;
+  	slow = slow.next;
+  }
+  return slow;
+}
