@@ -54,3 +54,28 @@ function find_cycle_length (head){
 	}
 	return k;
 }
+
+//Happy number
+const find_happy_number = function(num) {
+  let fast = findSquare(findSquare(num));
+  let slow = findSquare(num);
+  while(fast !== slow){
+  	if(fast === 1)
+  		return true;
+  	fast = findSquare(findSquare(fast));
+  	slow = findSquare(slow);
+  }
+  if(fast === 1)
+  	return true
+  return false;
+};
+
+//helper function to find sum of squares of digits
+function findSquare (num){
+	let sum = 0;
+	while(num > 0){
+		sum += (num%10)*(num%10);
+		num = Math.floor(num/10);
+	}
+	return sum;
+}
