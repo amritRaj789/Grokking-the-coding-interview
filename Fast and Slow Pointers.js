@@ -91,3 +91,26 @@ const find_middle_of_linked_list = function(head) {
   }
   return slow;
 }
+
+
+//Palindrome LinkedList (medium)
+const is_palindromic_linked_list= function(head) {
+  let fast = head;
+  let slow = head;
+  let array = [slow.value];
+  while(fast.next !== null && fast.next.next !== null){
+  	fast = fast.next.next;
+  	slow = slow.next;
+  	array.push(slow.value);
+  }
+  if(fast.next !== null)
+  	slow = slow.next;
+
+  while(slow !== null){
+  	if(slow.value !== array.pop())
+  		return false
+  	slow = slow.next;
+  }
+  return true;
+
+};
