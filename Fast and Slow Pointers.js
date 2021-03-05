@@ -225,26 +225,40 @@ function circular_array_loop_exists(arr) {
 
   return false;
 }
+// The above has O(N^2) time complexity
+
+//I still haven't found a solution for O(N) by myself
+
+//Here's a solution I found on Leetcode 
 
 
-function find_next_index(arr, isForward, currentIndex) {
-  direction = arr[currentIndex] >= 0;
 
-  if (isForward !== direction) {
-    return -1; // change in direction, return -1
-  }
-
-  nextIndex = (currentIndex + arr[currentIndex]) % arr.length;
-  if (nextIndex < 0) {
-    nextIndex += arr.length; // wrap around for negative numbers
-  }
-
-  // one element cycle, return -1
-  if (nextIndex === currentIndex) {
-    nextIndex = -1;
-  }
-
-  return nextIndex;
+var circularArrayLoop = function(nums) {
+    //1.This array maybe has more than one cycle that we don't know,
+	//so we need to run each element to check cycle. 
+    for(let i = 0 ; i < nums.length ; i++){
+	    //2.this cycle only can choose one direction , 
+		//so we need to use 'dir' to check they all positive or negative.
+        let ans = [];
+        let dir = Math.sign(nums[i]);
+        let j = i;
+        
+		//3.if this element has been checked, change it to zero.
+		//if the nums[j]  == 0 , means we find this cycle and get the start point called j.
+        while(nums[j] != 0 && Math.sign(nums[j]) == dir){
+            let preJ = j;
+            
+            j += nums[j];
+            j %= nums.length;
+            j += j < 0 ? nums.length : 0;
+            
+            ans.push(preJ);
+            nums[preJ] = 0;
+        }
+		//4.check the cycle size more than one or not
+        let pos = ans.indexOf(j);
+        if(ans.length > 1 && pos != -1 && pos != ans.length - 1)  return true;
+    }
+    
+    return false;
 }
-
-
