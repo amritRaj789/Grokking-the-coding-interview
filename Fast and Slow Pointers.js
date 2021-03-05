@@ -162,3 +162,35 @@ function reverse(head) {
   }
   return prev;
 }
+
+
+//Rearrange a LinkedList (medium)
+
+const reorder = function(head) {
+	let fast = head;
+	let slow = head;
+	while(fast !== null && fast.next !== null){
+		fast = fast.next.next;
+		slow = slow.next;
+	}
+	let headSecondHalf = reverse(slow);
+	while(head.next !== headSecondHalf){
+		let temp1 = head.next;
+		head.next = headSecondHalf;
+		let temp2 = headSecondHalf.next;
+		headSecondHalf.next = temp1;
+		head = temp1;
+		headSecondHalf = temp2;
+	}
+}
+
+function reverse(head){
+	let prev = null;
+	while(head !== null){
+		temp = head.next;
+		head.next = prev;
+		prev = head;
+		head = temp;
+	}
+  return prev;
+}
