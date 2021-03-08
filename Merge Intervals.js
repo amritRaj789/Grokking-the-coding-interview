@@ -126,3 +126,52 @@ function merge (intervals_a, intervals_b){
 	}
 	return result;
 }
+
+/*
+Problem 4 Conflicting Appointments
+Given an array of intervals representing "N" appointments, find out if a person can attend all the appointments
+*/
+
+function can_attend_all_appointments (intervals){
+	intervals.sort((a, b) => a.start - b.start);
+	for(let i = 0; i < intervals.length-1; i++){
+		if(intervals[i].end > intervals[i+1].start)
+			return false;
+	}
+	return true;
+}
+
+/*
+Problem Challenge 1 : Minimum Meeting Rooms
+Given a list of intervals representing the start and end time of "N" meetings, find the minimum number of rooms required to hold all the meetings.
+*/
+
+// Have skipped it for now. Gotta learn Heaps for this one first
+
+
+/*
+Problem Challenge 2 : Maximum CPU Load
+We are given a list of Jobs. Each job has a Start time, an End time, and a CPU load when it is running. Our goal is to find the maximum CPU load at any time if all the jobs are running on the same machine.
+
+*/
+// Similar to above problem so will have to skip it for now
+
+
+/*Problem Challenge 3: Employee Free Time (hard)
+For ‘K’ employees, we are given a list of intervals representing each employee’s working hours. Our goal is to determine if there is a free interval which is common to all employees. You can assume that each list of employee working hours is sorted on the start time.
+*/
+
+function find_employee_free_time (schedule){
+	let result = [];
+	let array = [];
+	schedule.forEach(list => array.push(...list));
+	array.sort((a, b) => a.start - b.start);
+	for(let i = 0; i < array.length-1; i++){
+		if(array[i].end < array[i+1].start){
+			result.push(new Interval(array[i].end, array[i+1].start));
+		}
+	}
+	return result;
+}
+
+// It is O(Nlog(N)). But we can do even better i.e O(NLog(k)) by using minHeap which I will learn later
