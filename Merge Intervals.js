@@ -88,3 +88,41 @@ function insert(intervals, new_interval) {
 
   return merged;
 }
+
+
+/*
+Problem 3 Intervals Intersection
+
+Given 2 intervals, find the intersection of these two intervals. 
+Each list consists of disjoint intervals sorted on their start time.
+*/
+
+function merge (intervals_a, intervals_b){
+	let result = [];
+	let p1 = 0;
+	let p2 = 0;
+	while(p1 < intervals_a.length && p2 < intervals_b.length){
+		const intervalA = intervals_a[p1];
+		const intervalB = intervals_b[p2];
+		if(intervalA.end < intervalB.start){
+			p1++;
+		}
+		else if(intervalB.end < intervalA.start){
+			p2++;
+		}
+		else{
+			const start = Math.max(intervalA.start, intervalB.start);
+			const end = Math.min(intervalA.end, intervalB.end);
+			result.push(new Interval(start, end));
+			if(intervalA.end < intervalB.end)
+				p1++;
+			else if(intervalB.end < intervalA.end)
+				p2++;
+			else{
+				p1++;
+				p2++;
+			}
+		}
+	}
+	return result;
+}
