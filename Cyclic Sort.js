@@ -100,6 +100,30 @@ const find_duplicate = function (nums){
 }
 
 /*
+Problem 4: Find all Duplicate Numbers
+We are given an unsorted array containing ‘n’ numbers taken from the range 1 to ‘n’. \
+The array has some numbers appearing twice, find all these duplicate numbers without using any extra space.
+*/
+
+const find_all_duplicates = function(nums) {
+	let result = [];
+	let i = 0;
+	while(i < nums.length){
+		while(nums[i] !== nums[nums[i]-1]){
+			const temp = nums[nums[i] -  1];
+			nums[nums[i] - 1] = nums[i];
+			nums[i] = temp;
+		}
+		i++;
+	}
+	for(let j = 0; j < nums.length; j++){
+		if(nums[j] !== j+1)
+			result.push(nums[j]);
+	}
+	return result;
+};
+
+/*
 Problem Challenge 1: Find the Corrupt Pair
 We are given an unsorted array containing ‘n’ numbers taken from the range 1 to ‘n’. 
 The array originally contained all the numbers from 1 to ‘n’, but due to a data error, one of the numbers got duplicated which also resulted in one number going missing. Find both these numbers.
