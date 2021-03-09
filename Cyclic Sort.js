@@ -53,3 +53,28 @@ const find_missing_number = function (nums){
 	}
 	return n;
 }
+
+/*
+Problem 2: Find all the missing numbers
+We are given an unsorted array containing numbers taken from the range 1 to ‘n’. The array can have duplicates, 
+which means some numbers will be missing. Find all those missing numbers.
+*/
+
+const find_missing_numbers = function(nums) {
+  missingNumbers = [];
+  let i = 0;
+  while(i < nums.length){
+  	while(nums[i] !== nums[nums[i]-1]){
+  		const temp = nums[nums[i] - 1];
+  		nums[nums[i] - 1] = nums[i];
+  		nums[i] = temp;
+  	}
+  	i++;
+  }
+
+  for(let j = 0; j < nums.length; j++){
+  	if(nums[j] !== j+1)
+  		missingNumbers.push(j+1);
+  }
+  return missingNumbers;
+};
