@@ -145,3 +145,31 @@ const find_corrupt_numbers = function(nums) {
   	}
   }
 }
+
+/*
+Problem Challenge 2: Find the smallest missing Positive Number
+Given an unsorted array containing numbers, find the smallest missing positive number in it
+
+*/
+
+const find_first_smallest_missing_positive = function(nums) {
+  for(let i = 0; i < nums.length; i++){
+  	if((0 <= nums[i]) (nums[i] < nums.length) && (nums[i] !== i)){
+  		const temp = nums[nums[i]];
+  		nums[nums[i]] = nums[i];
+  		nums[i] = temp;
+  		i = i-1;
+  	}
+  }
+  let j = 1;
+  while(j < nums.length){
+  	if(nums[j] !== j)
+  		return j
+  	j++;
+  }
+  return j;
+};
+
+
+
+
