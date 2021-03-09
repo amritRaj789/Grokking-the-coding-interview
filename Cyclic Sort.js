@@ -79,8 +79,25 @@ const find_missing_numbers = function(nums) {
   return missingNumbers;
 };
 
+/*
+Problem 3: Find the Duplicate Number
+We are given an unsorted array containing ‘n+1’ numbers taken from the range 1 to ‘n’. The array has only one duplicate but it can be repeated multiple times. 
+Find that duplicate number without using any extra space. You are, however, allowed to modify the input array.
+*/
 
-
+const find_duplicate = function (nums){
+	let i = 0;
+	while(i < nums.length){
+		while(nums[i] !== i+1){
+			if(nums[i] === nums[nums[i] - 1])
+				return nums[i];
+			const temp = nums[nums[i] - 1];
+			nums[nums[i] - 1]  = nums[i];
+			nums[i] = temp;
+		}
+		i++;
+	}
+}
 
 /*
 Problem Challenge 1: Find the Corrupt Pair
