@@ -50,4 +50,33 @@ const reverse_sub_list = function(head, p, q) {
 };
 // won't work if p = 1
 
-// Reverse every
+/*
+Reverse every K-element Sub-list 
+Given the head of a LinkedList and a number ‘k’, reverse every ‘k’ sized sub-list starting from the head.
+If, in the end, you are left with a sub-list with less than ‘k’ elements, reverse it too
+*/const reverse_every_k_elements = function(head, k) {
+  let copyLink = head;
+  let count = 0;
+  let current = head;
+  while(current !== null){
+  	let i = k;
+  	let prev = null;
+  	let copyLink2 = current;
+  	while(i > 0 && current !== null){
+		let temp = current.next;
+	  	current.next = prev;
+	  	prev = current;
+	  	current = temp;
+	  	i--;
+  	}
+  	count++;
+  	if(count === 1){
+  		head = prev;
+  	}
+  	if(count >= 2){
+  		copyLink.next = prev;
+  		copyLink = copyLink2;
+  	}
+  }
+  return head;
+}
