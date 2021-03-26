@@ -92,3 +92,41 @@ const traverse = function(root) {
   return result;
 }
 
+
+/*Problem 3
+
+First travel left to right, then right to left; for each level
+ZigZag traversal
+*/
+const traverse = function(root) {
+  let result = [];
+  let queue = [root];
+  let count;
+  let odd = 1;
+  while(queue.length !== 0){
+  	let arr = [];
+  	count = queue.length;
+  	while(count > 0){
+  		let temp = queue.shift();
+  		arr.push(temp.value);
+  		count--;
+  		if(temp.left)
+  			queue.push(temp.left)
+  		if(temp.right)
+  			queue.push(temp.right);
+  	}
+  	if(odd%2 === 1){
+  		result.push(arr);
+  		odd++;
+  	}
+  	else{
+  		let reversearr = [];
+  		for(let i = arr.length-1; i >= 0; i--){
+  			reversearr.push(arr[i]);
+  		}
+  		result.push(reversearr);
+  		odd++;
+  	}
+  }
+  return result;
+}
