@@ -61,4 +61,34 @@ const traverse = function(root) {
   return result;
 }
 
+/*PROBLEM 2
+Reverse Level Order Traversal
+Lowest level comes first.
+Given a binary tree, populate an array to represent its level-by-level traversal in reverse order, i.e., the lowest level comes first. You should populate the values of all nodes in each level from left to right in separate sub-arrays.
+Given a binary tree, populate an array to represent its level-by-level traversal in reverse order, i.e., the lowest level comes first. You should populate the values of all nodes in each level from left to right in separate sub-arrays.*/
+
+const traverse = function(root) {
+  result = [];
+  let stack = [];
+  let queue = [root];
+  let count;
+  while(queue.length !== 0){
+  	let arr = [];
+  	count = queue.length;
+  	while(count > 0){
+  		let temp = queue.shift();
+  		arr.push(temp.value);
+  		if(temp.left)
+  			queue.push(temp.left);
+  		if(temp.right)
+  			queue.push(temp.right);
+  		count--;
+  	}
+  	stack.push(arr);
+  }
+  for(let i = stack.length-1; i >= 0; i--){
+  	result.push(stack[i]);
+  }
+  return result;
+}
 
