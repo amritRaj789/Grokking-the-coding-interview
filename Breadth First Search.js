@@ -198,3 +198,28 @@ const find_successor = function (root, key){
 			return queue.shift();
 	}
 }
+
+
+/*Problem 7
+Connect Level Order Siblings 
+Given a binary tree, connect each node with its level order successor. 
+The last node of each level should point to a null node.
+*/
+const connect_level_order_siblings = function (root){
+	let queue = [root];
+	while(queue.length !== 0){
+		count = queue.length;
+		let prev
+		while(count > 0){
+			let temp = queue.shift();
+			if(count !==1)
+				temp.next = queue[0];
+			if(temp.left)
+				queue.push(temp.left);
+			if(temp.right)
+				queue.push(temp.right);
+			count--;
+		}
+	}
+	return
+}
