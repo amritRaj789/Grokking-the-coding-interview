@@ -25,3 +25,23 @@ const has_path = function (root, number){
 	}
 	return false;
 }
+
+//Recursive Solution
+const has_path = function(root, sum){
+	function dfs(node, num){
+    if(node === null)
+      return false
+		if(node.left === null && node.right === null){
+			if(num + node.value === sum)
+				return true
+      return false
+		}
+		else{
+			return dfs(node.left, num+node.value) || dfs(node.right, num+node.value)
+		}
+	}
+  return dfs(root, 0);
+}
+
+
+
