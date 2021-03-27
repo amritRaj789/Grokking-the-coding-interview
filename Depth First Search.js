@@ -29,12 +29,12 @@ const has_path = function (root, number){
 //Recursive Solution
 const has_path = function(root, sum){
 	function dfs(node, num){
-    if(node === null)
-      return false
+	    if(node === null)
+	      return false
 		if(node.left === null && node.right === null){
 			if(num + node.value === sum)
 				return true
-      return false
+      		return false
 		}
 		else{
 			return dfs(node.left, num+node.value) || dfs(node.right, num+node.value)
@@ -43,5 +43,27 @@ const has_path = function(root, sum){
   return dfs(root, 0);
 }
 
-
-
+/*Problem 2
+All Paths to Sum
+Given a binary tree and a number ‘S’, find all paths from root-to-leaf such that 
+the sum of all the node values of each path equals ‘S’.
+*/
+const find_paths = function(root, sum){
+	let result = [];
+	function dfs(node, num, arr){
+		if(node === null)
+			return
+		if(node.left === null && node.right === null){
+			if(num + node.value === sum){
+				result.push([...arr, node.value]);
+			}
+			return
+		}
+		else{
+			dfs(node.left, num+node.value, [...arr, node.value]);
+			dfs(node.right, num+node.value, [...arr, node.value]);
+		}
+	}
+  	dfs(root, 0, []);
+	return result;
+}
