@@ -130,3 +130,28 @@ const traverse = function(root) {
   }
   return result;
 }
+
+/*Problem 4
+Level Averages in a Binary Tree
+*/
+const find_level_averages = function (root){
+	let result = [];
+	let queue = [root];
+	let count;
+	while(queue.length !== 0){
+		count = queue.length;
+		n = count;
+		let sum = 0;
+		while(count > 0){
+			let temp = queue.shift();
+			sum += temp.value;
+			if(temp.left)
+				queue.push(temp.left);
+			if(temp.right)
+				queue.push(temp.right);
+			count--;
+		}
+		result.push(sum/n);
+	}
+	return result;
+}
