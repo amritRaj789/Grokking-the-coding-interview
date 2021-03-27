@@ -179,3 +179,22 @@ const find_minimum_depth = function (root){
 		}
 	}
 }
+
+
+/*Problem 6
+Level Order Successor
+Given a binary tree and a node, find the level order successor of the given node in the tree. 
+The level order successor is the node that appears right after the given node in the level order traversal.
+*/
+const find_successor = function (root, key){
+	let queue = [root];
+	while(queue.length !== 0){
+		temp = queue.shift();
+		if(temp.left)
+			queue.push(temp.left);
+		if(temp.right)
+			queue.push(temp.right);
+		if(temp.value === key)
+			return queue.shift();
+	}
+}
