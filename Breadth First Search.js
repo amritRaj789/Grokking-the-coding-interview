@@ -223,3 +223,20 @@ const connect_level_order_siblings = function (root){
 	}
 	return
 }
+
+/*Problem Challenge 1
+Connect All Level Order Siblings
+Given a binary tree, connect each node with its level order successor.
+The last node of each level should point to the first node of the next level.
+*/
+const connect_all_siblings = function (root){
+	let queue = [root];
+	while(queue.length !== 0){
+		let temp = queue.shift();
+		if(temp.left)
+			queue.push(temp.left)
+		if(temp.right)
+			queue.push(temp.right)
+		temp.next = (queue.length) ? queue[0] : null;
+	}
+}
