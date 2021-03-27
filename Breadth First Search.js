@@ -240,3 +240,27 @@ const connect_all_siblings = function (root){
 		temp.next = (queue.length) ? queue[0] : null;
 	}
 }
+
+/*Problem Challenge 2
+Right view of a Binary Tree
+Given a binary tree, return an array containing nodes in its right view.
+The right view of a binary tree is the set of nodes visible when the tree is seen from the right side.
+*/
+const tree_right_view = function(root){
+	let result = [];
+	let queue = [root];
+	while(queue.length !== 0){
+		count = queue.length;
+		while(count > 0){
+			temp = queue.shift();
+			if(count == 1)
+				result.push(temp.value);
+			if(temp.left)
+				queue.push(temp.left);
+			if(temp.right)
+				queue.push(temp.right);
+			count--;
+		}
+	}
+	return result;
+}
