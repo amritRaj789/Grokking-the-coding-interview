@@ -67,3 +67,50 @@ const find_paths = function(root, sum){
   	dfs(root, 0, []);
 	return result;
 }
+
+//iterative solution
+
+const find_paths = function (root, sum){
+	let stack = [[root, 0, []]];
+	let result = [];
+	while(stack.length !== 0){
+		temp = stack.pop();
+		node = temp[0];
+		currSum = temp[1];
+		arr = temp[2];
+		if(node.left === null && node.right === null){
+			if(currSum + node.value === sum)
+				result.push([...arr, node.value])
+		}
+		else{
+			if(node.right)
+				stack.push([node.right, currSum+node.value, [...arr, node.value]])
+			if(node.left)
+				stack.push([node.left, currSum+node.value, [...arr, node.value]])
+		}
+	}
+	return result;
+}
+//Similar Problems
+// Given a Binary Tree, return all root-to-leaf paths
+
+
+const list_all_paths = function(root){
+	let stack = [[root, []]]
+	let result = [];
+	while(stack.length !== 0){
+		temp = stack.pop();
+		node = temp[0];
+		arr = temp[1];
+		if(node.left === null && node.right === null){
+			result.push([...arr, node.value])
+		}
+		else{
+			if(node.left)
+				stack.push([node.left, [...arr, node.value]])
+			if(node.right)
+				stack.push([node.right, [...arr, node.value]])
+		}
+	}
+	return result;
+}
