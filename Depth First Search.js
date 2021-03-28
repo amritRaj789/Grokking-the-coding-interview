@@ -241,3 +241,34 @@ const count_paths = function (root, s){
 	return count;
 }
 
+/*Problem Challenge 1
+Tree diameter
+Given a binary tree, find the length of its diameter. 
+The diameter of a tree is the number of nodes on the longest path between any two leaf nodes. 
+The diameter of a tree may or may not pass through the root.
+Note: You can always assume that there are at least two leaf nodes in the given tree.
+*/
+find_diameter (root){
+	let maxLength = 0;
+	function check_diamter (node){
+		const diameter = check(node.left, 0) + check(node.right, 0) + 1;
+		maxLength = Math.max(maxLength, diameter);
+	}
+	function check(start, height){
+		if(start === null)
+			return height;
+		return Math.max(check(start.left, height+1), check(start.right, height+1));
+	}
+	let queue = [root];
+	while(queue.length !== 0){
+		let tempNode = queue.shift();
+		if(tempNode.left !== null && tempNode.right !== null)
+			check_diamter(tempNode);
+		if(tempNode.left)
+			queue.push(tempNode.left);
+		if(tempNode.right)
+			queue.push(tempNode.right);
+	}
+	return maxLength;
+}
+
