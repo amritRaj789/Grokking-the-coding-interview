@@ -173,3 +173,30 @@ const find_path = function(root, sequence){
 	}
 	return false;
 }
+
+// alternate BFS Solution
+
+const find_path = function (root, sequence){
+	let queue = [root];
+	let level = 0;
+	while(queue.length !== 0){
+		if(level >= sequence.length)
+			return false;
+		count = queue.length;
+		present_for_this_level = false;
+		while(count > 0){
+			temp = queue.shift();
+			if(temp.value === sequence[level])
+				present_for_this_level = true;
+			if(temp.left)
+				queue.push(temp.left);
+			if(temp.right)
+				queue.push(temp.right);
+			count--;
+		}
+		if(!present_for_this_level)
+				return false;
+		level++;
+	}
+	return true;
+}
