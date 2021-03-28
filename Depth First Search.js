@@ -200,3 +200,44 @@ const find_path = function (root, sequence){
 	}
 	return true;
 }
+
+/*Problem 5
+Count paths for a Sum
+Given a binary tree and a number ‘S’, find all paths in the tree such that the sum of all the node values of each path equals ‘S’. 
+Please note that the paths can start or end at any node but all paths must follow direction from parent to child (top to bottom).*/
+
+
+
+const count_paths = function (root, s){
+	let count = 0;
+	function check_path(start, s){
+		let stack = [[start, 0]];
+		while(stack.length !== 0){
+			let temp = stack.pop();
+			let node = temp[0];
+			let newSum = temp[1] + node.value;
+			if(newSum === s){
+				count++;
+			}
+			if(newSum >= s)	//optimization to stop going deeper if sum crosses s
+				continue
+			else{
+				if(node.left)
+					stack.push([node.left, newSum]);
+				if(node.right)
+					stack.push([node.right, newSum]);
+			}
+		}
+	}
+	let queue = [root];
+	while(queue.length !== 0){
+		let currNode = queue.shift();
+		check_path(currNode, s);
+		if(currNode.left)
+			queue.push(currNode.left)
+		if(currNode.right)
+			queue.push(currNode.right)
+	}
+	return count;
+}
+
