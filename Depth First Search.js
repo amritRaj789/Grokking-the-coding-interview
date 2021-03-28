@@ -272,3 +272,69 @@ find_diameter (root){
 	return maxLength;
 }
 
+
+final_diameter (root){
+
+}
+
+function dfs(node, )
+
+
+/*Problem Challenge 2
+Path with Maximum Sum
+Find the path with the maximum sum in a given binary tree. Write a function that returns the maximum sum.
+A path can be defined as a sequence of nodes between any two nodes and doesn’t necessarily pass through the root. 
+The path must contain at least one node.
+*/
+const find_maximum_path_sum = function (root){
+	let maxSum = -Infinity;
+	function findMax(node){
+		const total = check(node.left, 0) + check(node.right, 0) + node.value;
+		maxSum = Math.max(maxSum, total);
+	}
+	function check(start, sum) {
+		if(start === null)
+			return sum
+		else{
+			return Math.max(check(start.right, sum+start.value), check(start.left, sum+start.value));
+		}
+	}
+	if(root.left === null || root.right === null)
+		findMax(root);
+	let queue = [root];
+	while(queue.length !== 0){
+		let tempNode = queue.shift();
+		if(tempNode.left !== null && tempNode.right !== null)
+			findMax(tempNode);
+		if(tempNode.left)
+			queue.push(tempNode.left);
+		if(tempNode.right)
+			queue.push(tempNode.right);
+	}
+	return maxSum;
+}
+//this works if there are no negative numbers in the tree
+
+// Educative's recursive solution
+const find_maximum_path_sum = function (root) {
+	let maxSum = -Infinity;
+
+	function recursiveTravel (node){
+		if(node === null){
+			return 0;
+		}
+		let maxLeftTree = recursiveTravel(node.left);
+		let maxRightTree = recursiveTravel(node.right);
+
+		maxLeftTree = Math.max(maxLeftTree, 0);
+		maxRightTree = Math.max(maxRightTree, 0);
+
+		let localSum = maxLeftTree + maxRightTree + node.value;
+		maxSum = Math.max(maxSum, localSum);
+		return Math.max(maxLeftTree, maxRightTree) + node.value;
+	}
+	recursiveTravel(root);
+	return maxSum;
+}
+
+
