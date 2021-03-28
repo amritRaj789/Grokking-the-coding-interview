@@ -140,3 +140,36 @@ const find_sum_of_path_numbers = function(root){
 	}
 	return totalSum;
 }
+
+/*Problem 4
+Path with a Given Sequence
+Given a binary tree and a number sequence, find if the sequence is present as a root-to-leaf path in the given tree.
+*/
+const find_path = function(root, sequence){
+	let stack = [[root, []]];
+	while(stack.length !== 0){
+		temp = stack.pop();
+		node = temp[0];
+		arr = [...temp[1], node.value];
+		if(node.left === null && node.right === null){
+			if(arr.length === sequence.length){
+				present = true;
+				for(let i = 0; i < sequence.length; i++){
+					if(sequence[i] !== arr[i]){
+						present = false;
+						break;
+					}
+				}
+				if(present)
+					return true;
+			}
+		}
+		else{
+			if(node.left)
+				stack.push([node.left, arr]);
+			if(node.right)
+				stack.push([node.right, arr]);
+		}
+	}
+	return false;
+}
