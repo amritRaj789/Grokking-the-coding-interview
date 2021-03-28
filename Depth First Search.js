@@ -114,3 +114,29 @@ const list_all_paths = function(root){
 	}
 	return result;
 }
+
+/*Problem 3
+Sum of Path Numbers
+Given a binary tree where each node can only have a digit (0-9) value, each root-to-leaf path will represent a number. 
+Find the total sum of all the numbers represented by all paths.
+*/
+const find_sum_of_path_numbers = function(root){
+	let totalSum = 0;
+	let stack = [[root, 0]];
+	while(stack.length !== 0){
+		temp = stack.pop();
+		node = temp[0];
+		num = temp[1];
+		newNum = num*10 + node.value;
+		if(node.left === null && node.right === null){
+			totalSum += newNum;
+		}
+		else{
+			if(node.left)
+				stack.push([node.left, newNum])
+			if(node.right)
+				stack.push([node.right, newNum])
+		}
+	}
+	return totalSum;
+}
