@@ -140,6 +140,22 @@ const find_sum_of_path_numbers = function(root){
 	}
 	return totalSum;
 }
+// recursive
+const find_sum_of_path_numbers = function(root) {
+	let sum = 0;
+	function dfs(node, total){
+		if(node.left === null && node.right === null){
+			sum += total*10 + node.value;
+		}
+		if(node.left)
+			dfs(node.left, total*10+node.value)
+		if(node.right)
+			dfs(node.right, total*10+node.value)
+	}
+	dfs(root, 0);
+	return sum;
+};
+
 
 /*Problem 4
 Path with a Given Sequence
@@ -200,6 +216,20 @@ const find_path = function (root, sequence){
 	}
 	return true;
 }
+
+//recursive
+const find_path = function(root, sequence) {
+	function dfs(node, l){
+		if(node == null)
+			return false
+    	if(node.value !== sequence[l])
+			return false;
+		if(l == sequence.length-1)
+			return true;
+		return (dfs(node.left, l+1) || dfs(node.right, l+1));
+	}
+	return dfs(root, 0)
+};
 
 /*Problem 5
 Count paths for a Sum
