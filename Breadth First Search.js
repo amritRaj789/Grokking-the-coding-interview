@@ -142,7 +142,7 @@ function findHeight(root){
 }
 
 /*Problem 3
-
+Zigzag traversal
 First travel left to right, then right to left; for each level
 ZigZag traversal
 */
@@ -178,6 +178,24 @@ const traverse = function(root) {
   }
   return result;
 }
+//recursive
+const traverse = function(root) {
+	let result = [];
+	function bfs(node, l){
+		if(result[l] === undefined)
+			result.push([]);
+		if(l%2 === 0)
+			result[l].unshift(node.value);
+		else
+			result[l].push(node.value);
+		if(node.left)
+			bfs(node.left, l+1)
+		if(node.right)
+			bfs(node.right, l+1)
+	}
+	bfs(root, 0);
+	return result;
+};
 
 /*Problem 4
 Level Averages in a Binary Tree
