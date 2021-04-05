@@ -61,6 +61,22 @@ const traverse = function(root) {
   return result;
 }
 
+//recursive
+const traverse = function (root){
+	let result = [];
+	function bfs(node, l){
+		if(result[l] === undefined)
+			result.push([]);
+		result[l].push(node.value);
+		if(node.left)
+			bfs(node.left, l+1)
+		if(node.right)
+			bfs(node.right, l+1)
+	}
+	bfs(root, 0)
+	return result;
+}
+
 /*PROBLEM 2
 Reverse Level Order Traversal
 Lowest level comes first.
