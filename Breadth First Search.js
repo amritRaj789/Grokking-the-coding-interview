@@ -108,6 +108,38 @@ const traverse = function(root) {
   return result;
 }
 
+//recursive
+const traverse = function(root) {
+	let levels = findHeight(root);
+	let result = new Array(levels);
+	for(let i = 0; i < levels; i++){
+		result[i] = [];
+	}
+	function bfs(node, l){
+		result[levels-l].push(node.value);
+		if(node.left)
+			bfs(node.left, l+1);
+		if(node.right)
+			bfs(node.right, l+1);
+	}
+	bfs(root, 1);
+	return result
+}
+function findHeight(root){
+	let maxHeight = 0;
+	function recursive(node, l){
+		if(node.left === null && node.right === null){
+			maxHeight = Math.max(l, maxHeight);
+			return;
+		}
+		if(node.left)
+			recursive(node.left, l+1);
+		if(node.right)
+			recursive(node.right. l+1);
+	}
+	recursive(root, 1);
+	return maxHeight;
+}
 
 /*Problem 3
 
