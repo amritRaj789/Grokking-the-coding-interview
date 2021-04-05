@@ -221,6 +221,8 @@ const find_level_averages = function (root){
 	}
 	return result;
 }
+// futile to do recursively
+
 
 /*Problem 5
 MinFind the minimum depth of a binary tree. 
@@ -245,7 +247,24 @@ const find_minimum_depth = function (root){
 		}
 	}
 }
-
+//recursive
+const find_minimum_depth = function(root) {
+	let minDepth = +Infinity;
+	function bfs(node, l){
+		if(node.left === null && node.right === null){
+			minDepth = Math.min(minDepth, l)
+			return
+		}
+		if(l >= minDepth)
+			return
+		if(node.left)
+			bfs(node.left, l+1);
+		if(node.left)
+			bfs(node.left, l+1);
+	}
+	bfs(root, 1);
+	return minDepth;
+};
 
 /*Problem 6
 Level Order Successor
