@@ -271,6 +271,28 @@ const count_paths = function (root, s){
 	return count;
 }
 
+//recursive
+const count_paths = function(root, S) {
+	let paths = 0;
+	function dfs(node, total){
+		if(node.value + total === s){
+			paths++;
+		}
+		else{
+			if(node.left)
+				dfs(node.left, total+node.value);
+			if(node.right)
+				dfs(node.right, total+node.value);
+		}
+		if(node.left)
+			dfs(node.left, 0);
+		if(node.right)
+			dfs(node.right, 0);
+	}
+	dfs(root, 0);
+	return paths;
+};
+
 /*Problem Challenge 1
 Tree diameter
 Given a binary tree, find the length of its diameter. 
@@ -302,13 +324,23 @@ find_diameter (root){
 	return maxLength;
 }
 
-
-final_diameter (root){
-
+// recursive
+find_diameter (root){
+	let maxLength = 0;
+	function dfs(node){
+		if(node === null)
+			return 0
+		if(node.left === null && node.right === null)
+			return 1
+		let leftMax = dfs(node.left);
+		let rightMax = dfs(node.right);
+		if(node.left !== null && node.right !== null)
+			maxLength = Math.max(leftMax + rightMax + 1, maxLength);
+		return (Math.max(leftMax, rightMax) + 1);
+	}
+	dfs(root);
+	return maxLength;
 }
-
-function dfs(node, )
-
 
 /*Problem Challenge 2
 Path with Maximum Sum
