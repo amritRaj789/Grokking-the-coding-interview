@@ -330,11 +330,9 @@ find_diameter (root){
 	function dfs(node){
 		if(node === null)
 			return 0
-		if(node.left === null && node.right === null)
-			return 1
 		let leftMax = dfs(node.left);
 		let rightMax = dfs(node.right);
-		if(node.left !== null && node.right !== null)
+		if(leftMax !== null && rightMax !== null)
 			maxLength = Math.max(leftMax + rightMax + 1, maxLength);
 		return (Math.max(leftMax, rightMax) + 1);
 	}
@@ -400,3 +398,18 @@ const find_maximum_path_sum = function (root) {
 }
 
 
+// my recursive solution
+const find_maximum_path_sum = function (root){
+	let maxPathSum = -Infinity;
+	function dfs(node){
+		if(node == null)
+			return 0;
+		let leftSum = dfs(node.left);
+		let rightSum = dfs(node.right);
+		maxPathSum = Math.max(maxPathSum, leftSum + rightSum + node.value);
+		let maxSum = Math.max(leftSum, rightSum) + node.value;
+    return maxSum <= 0 ? 0 : maxSum;
+	}
+	dfs(root);
+	return maxPathSum;
+}
