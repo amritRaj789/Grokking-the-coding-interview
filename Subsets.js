@@ -182,9 +182,50 @@ let generate_generalized_abbreviation = function (word){
 			result.push(str.slice(0) + (count === 0 ? "" : count));
 			return
 		}
-			recursive(i+1, 0, str.slice(0) + (count === 0 ? "" : count) + word[i]);
+		recursive(i+1, 0, str.slice(0) + (count === 0 ? "" : count) + word[i]);
 		recursive(i+1, count+1, str.slice(0));
 	}
 	recursive(0, 0, "");
 	return result;
+}
+
+
+
+// Problem Challenge 1
+// Evaluate Expression
+
+// this is what I originally thought but since we cannot use eval I gotta do it differently
+const diff_ways_to_evaluate_expression = function (input){
+	let result = [];
+	let max = (input.length-1)/2;
+	function recursive(index, str, open, close){
+		if(open > max || close > open)
+			return
+		if(index === input.length){
+			result.push(eval(str.slice(0)));
+			return
+		}
+		recursive(index+2, str.slice(0, index) + "(" + str.slice(index+1), open+1, close);
+		recursive(index+2, str.slice(0, index) + ")" + str.slice(index+1), open, close+1);
+	}
+	recursive(0, "", 0, 0);
+	return result;
+}
+
+
+
+// Problem Challenge 3
+// Count of structurally unique BSTs
+
+// classic DP question
+let count_trees = function (n){
+	let dp = Array(n+1).fill(0);
+	dp[0] = 1;
+	dp[1] = 1;
+	for(let i = 2; i <= n; i++){
+		for(let j = 0; j < i; j++){
+			dp[i] += dp[j] * dp[i-1-j];
+		}
+	}
+	return dp[n];
 }
