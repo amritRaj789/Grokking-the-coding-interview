@@ -47,3 +47,35 @@ const find_subsets = function (nums){
 	return result;
 }
 // O(N*2^N) space and time
+
+
+//Problem 2
+// Subsets with duplicates
+
+
+// bfs iterative
+const find_subsets = function (nums){
+	let result = [[], [nums[0]]];
+	let prevLength = 1;
+	let currLength;
+	nums.sort((a,b) => a-b);
+	for(let i = 1; i < nums.length; i++){
+		currLength = result.length;
+		if(nums[i] !== nums[i-1]){
+			for(let j = 0; j < currLength; j++)
+				result.push([...result[j], nums[i]]);
+		}
+		else{
+			while(prevLength < currLength){
+				result.push([...result[prevLength], nums[i]]);
+				prevLength++;
+			}
+		}
+		prevLength = currLength;
+	}
+	return result;
+}
+// O(n*2^n) space and time
+
+
+
