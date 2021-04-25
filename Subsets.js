@@ -141,3 +141,24 @@ let find_letter_case_string_permutations = function (string){
 }
 
 // both of the above methods gave me the same efficiency in leetcode trials
+
+
+// Problem 5
+// Balanced Parentheses
+//For a given number ‘N’, write a function to generate all combination of ‘N’ pairs of balanced parentheses.
+
+// DFS backtracking
+let generate_valid_parentheses = function (num){
+	function recursive(openCount, closeCount, str){
+		if(openCount === num && closeCount === num){
+			result.push(str.slice(0))
+			return
+		}
+		if(closeCount > openCount || openCount > num)
+			return
+		recursive(openCount+1, closeCount, str.slice(0)+"(")
+		recursive(openCount, closeCount+1, str.slice(0)+")");
+	}
+	recursive(1, 0, "(");
+	return result;
+}
