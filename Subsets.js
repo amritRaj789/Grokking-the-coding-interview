@@ -78,4 +78,29 @@ const find_subsets = function (nums){
 // O(n*2^n) space and time
 
 
+// PERMUTATIONS
+// Given a set of numbers, find all of its permutations and output them
+
+
+// backtracking
+let find_permutations = function (nums){
+	let subsets = [];
+	function backtrack(i, arr){
+		if(i === nums.length){
+			subsets.push([...arr]);
+		}
+		for(let j = 0; j < nums.length; j++){
+			if(nums[j] !== false){
+				let temp = nums[j];
+				nums[j] = false;
+				backtrack(i+1, [...arr, temp]);
+				nums[j] = temp;
+			}
+		}
+	}
+	backtrack(0, []);
+	return subsets;
+}
+// O(N*N!) time
+// educative has it done it differently and I don't like their way
 
