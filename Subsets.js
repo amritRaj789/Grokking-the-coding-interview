@@ -77,7 +77,7 @@ const find_subsets = function (nums){
 }
 // O(n*2^n) space and time
 
-
+// Porblem 3
 // PERMUTATIONS
 // Given a set of numbers, find all of its permutations and output them
 
@@ -104,3 +104,40 @@ let find_permutations = function (nums){
 // O(N*N!) time
 // educative has it done it differently and I don't like their way
 
+
+// Problem 4
+// String permutations by changing case
+//Given a string, output all permutations by changing case
+
+// recursive brute force (DFS!!)
+var find_letter_case_string_permutations = function(S) {
+    let s = S.toLowerCase();
+    let result = [];
+    function recursive(index, string){
+        if(index === s.length){
+            result.push(string.slice(0));
+            return
+        }
+        recursive(index+1, string.slice(0));
+        if(s.charCodeAt(index) >= 97 && s.charCodeAt(index) <= 122)
+            recursive(index+1, string.slice(0, index) + string[index].toUpperCase() + string.slice(index+1));
+    }
+    recursive(0, s);
+    return result;
+};
+
+// iterative brute force (BFS!!)
+let find_letter_case_string_permutations = function (string){
+    let str = string.toLowerCase();
+	let result = [str.slice(0)];
+	for(let i = 0; i < str.length; i++){
+		if(str.charCodeAt(i) < 97 || str.charCodeAt(i) > 122)
+			continue
+		let length = result.length;
+		for(let j = 0; j < length; j++)
+			result.push(result[j].slice(0, i) + result[j][i].toUpperCase() + result[j].slice(i+1))
+	}
+	return result;
+}
+
+// both of the above methods gave me the same efficiency in leetcode trials
