@@ -60,3 +60,29 @@ const search_ceiling_of_a_number = function(arr, key) {
 	}
 	return left;
 };
+
+
+// Similar Problem
+// Floor of a given number
+
+function search_floor_of_a_number(arr, key){
+	let n = arr.length;
+	if(arr[n-1] <= key)
+		return n-1;
+	if(arr[0] > key)
+		return -1
+	let left = 0;
+	let right = n-1;
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(arr[mid] === key)
+			return mid;
+		else if(key > arr[mid])
+			left = mid+1;
+		else
+			right = mid-1;
+	}
+	return right;
+}
+
+
