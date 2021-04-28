@@ -212,6 +212,34 @@ const diff_ways_to_evaluate_expression = function (input){
 	return result;
 }
 
+// this is the final correct solution
+const diff_ways_to_evaluate_expression = function(input) {
+	let result = [];
+	if(input.length === 1)
+		result.push(Number(input[0]));
+	else{
+		for(let i = 0; i < input.length; i++){
+			let char = input[i]
+			if(char === "+" || char === "-" || char === "*"){
+				let left = diff_ways_to_evaluate_expression(input.slice(0, i));
+				let right = diff_ways_to_evaluate_expression(input.slice(i+1));
+				for(let i = 0; i < left.length; i++){
+					for(let j = 0; j < right.length; j++){
+						if(char === "+")
+							result.push(left[i] + right[j])
+						else if(char === "-")
+							result.push(left[i] - right[j])
+						else
+							result.push(left[i] * right[j]);
+					}
+				}
+
+			}
+		}
+	}
+	return result;
+};
+
 
 
 // Problem Challenge 3
