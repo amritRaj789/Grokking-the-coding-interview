@@ -86,3 +86,31 @@ function search_floor_of_a_number(arr, key){
 }
 
 
+// Problem 3
+// Next letter
+/*Given an array of lowercase letters sorted in ascending order, find the smallest letter 
+in the given array greater than a given ‘key’.
+Assume the given array is a circular list, which means that the last letter is assumed 
+to be connected with the first letter. This also means that the smallest letter in the 
+given array is greater than the last letter of the array and is also the first letter of the array.*/
+
+
+const search_next_letter = function (letters, key){
+	let n = letters.length;
+	if(key < letters[0] || key >= letters[n-1])
+		return letters[0];
+	let left = 0;
+	let right = n-1;
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(letters[mid] === key)
+			return letters[mid+1]
+		else if(key > letters[mid])
+			left = mid+1;
+		else
+			right = mid-1;
+	}
+	return letters[left]
+}
+
+console.log(search_next_letter(['a', 'c', 'f', 'h'], 'f'))
