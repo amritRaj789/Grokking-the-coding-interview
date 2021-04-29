@@ -114,3 +114,73 @@ const search_next_letter = function (letters, key){
 }
 
 console.log(search_next_letter(['a', 'c', 'f', 'h'], 'f'))
+
+
+
+// Problem 4
+// Number Range
+
+/*Given an array of numbers sorted in ascending order, find the range of a given number ‘key’. 
+The range of the ‘key’ will be the first and last position of the ‘key’ in the array.
+Write a function to return the range of the ‘key’. If the ‘key’ is not present return [-1, -1].*/
+
+const find_range = function (arr, key){
+	let left = 0;
+	let right = arr.length-1;
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(arr[mid] === key){
+			let leftBound = mid;
+			let rightBound = mid;
+			while(leftBound >= 0 && arr[leftBound] === key){
+				leftBound--;
+			}
+			while(rightBound < arr.length && arr[rightBound] === key){
+				rightBound++;
+			}
+			return [leftBound+1, rightBound-1]
+		}
+		else if(key < arr[mid])
+			right = mid-1;
+		else
+			left = mid+1;
+	}
+	return [-1, -1]
+}
+// the above method is bad if we have a large number of key present in the array.
+
+
+// this is O(2logN) but is better than the above if N is large
+const find_range = function (arr, key){
+	let left = 0;
+	let right = arr.length-1;
+	let rightBound = -1;
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(key > arr[mid])
+			left = mid+1;
+		else if(key < arr[mid])
+			right = mid-1;
+		else{
+			rightBound = mid;
+			left = mid+1;
+		}
+	}
+	if(rightBound === -1)
+		return [-1, -1];
+	left = 0;
+	right = arr.length-1;
+	let leftBound = -1;
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(key > arr[mid])
+			left = mid+1;
+		else if(key < arr[mid])
+			right = mid-1;
+		else{
+			leftBound = mid;
+			right = mid-1;
+		}
+	}
+	return [leftBound, rightBound];
+}
