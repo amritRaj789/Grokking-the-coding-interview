@@ -220,3 +220,30 @@ const search_in_infinite_array = function (reader, key){
 // here we first have to know the bounds for the binary search. 
 // leftbound is easy to know, for rightbound we will increase it exponentially
 // time complexity : O(logN + logN) = O(2logN) = O(logN)
+
+
+
+// Problem 6
+// Minimum Difference Element
+
+/*Given an array of numbers sorted in ascending order, find the element in the array 
+that has the minimum difference with the given ‘key’.*/
+
+// this is similar to floor of a number and ceiling of a number. find those 2 value and use them
+
+const search_min_diff_element = function (arr, key){
+	let left = 0;
+	let right = arr.length-1;
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(arr[mid] === key)
+			return key
+		else if(key < arr[mid])
+			right = mid-1;
+		else
+			left = mid+1;
+	}
+	if((arr[left] - key) < (key-arr[right]))
+		return arr[left]
+	return arr[right];
+}
