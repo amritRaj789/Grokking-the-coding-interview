@@ -336,3 +336,36 @@ const search_bitonic_array = function (arr, key){
 }
 // first find the maximum element, then do binary search for each of the increasing/decreasing part of the array
 // O(3logN) if key is in the descending half else O(2logN) if key is in the ascending half
+
+
+// Problem Challenge 2
+// Search in Rotated Array
+
+/*Given an array of numbers which is sorted in ascending order and also rotated by some arbitrary number, 
+find if a given ‘key’ is present in it.
+Write a function to return the index of the ‘key’ in the rotated array. If the ‘key’ is not present, 
+return -1. You can assume that the given array does not have any duplicates.*/
+
+const search_rotated_array = function(arr, key){
+	let left = 0;
+	let right = arr.length-1;
+	
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(arr[mid] === key)
+			return mid;
+		if(arr[left] <= arr[mid]){	// sorted in descending order
+			if(key <= arr[left] && key > arr[mid])
+				right = mid-1;
+			else
+				left = mid+1;
+		} 
+		else{		// sorted in ascending order
+			if(key <= arr[right] && key > arr[mid])
+				left = mid+1
+			else
+				right = mid-1;
+		}
+	}
+	return -1;
+}
