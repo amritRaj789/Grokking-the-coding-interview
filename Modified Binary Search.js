@@ -184,3 +184,39 @@ const find_range = function (arr, key){
 	}
 	return [leftBound, rightBound];
 }
+
+
+
+// Problem 5
+// Search in a Sorted Infinite Array
+
+/*Given an infinite sorted array (or an array with unknown size), find if a given number ‘key’ is present in the array. 
+Write a function to return the index of the ‘key’ if it is present in the array, otherwise return -1.
+Since it is not possible to define an array with infinite (unknown) size, 
+you will be provided with an interface ArrayReader to read elements of the array. ArrayReader.get(index) will return the number at index; 
+if the array’s size is smaller than the index, it will return Integer.MAX_VALUE.*/
+
+const search_in_infinite_array = function (reader, key){
+	if(reader.get(0) > key)
+		return -1;
+	let left = 0;
+	let right = 1;
+	while(reader.get(right) < key){
+		newLeft = right+1;
+		right += (right-left+1)*2;
+		left = newLeft;
+	}
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(reader.get(mid) === key)
+			return mid
+		else if(key < reader.get(mid))
+			right = mid-1;
+		else
+			left = mid+1;
+	}
+	return -1;
+}
+// here we first have to know the bounds for the binary search. 
+// leftbound is easy to know, for rightbound we will increase it exponentially
+// time complexity : O(logN + logN) = O(2logN) = O(logN)
