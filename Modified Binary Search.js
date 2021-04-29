@@ -247,3 +247,42 @@ const search_min_diff_element = function (arr, key){
 		return arr[left]
 	return arr[right];
 }
+
+
+//Problem 7
+// Bitonic Array Maximum
+/*
+Find the maximum value in a given Bitonic array. 
+An array is considered bitonic if it is monotonically increasing and then monotonically decreasing. 
+Monotonically increasing or decreasing means that for any index i in the array arr[i] != arr[i+1].*/
+
+
+const find_max_in_bitonic_array = function (arr){
+	let left = 0;
+	let right = arr.length-1;
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(mid === 0 || mid === arr.length-1)
+			return arr[mid]
+		if(arr[mid] > arr[mid+1] && arr[mid] > arr[mid-1])
+			return arr[mid];
+		else if(arr[mid] > arr[mid-1] && arr[mid] < arr[mid+1]) // mid is in the monotonically incerasing half
+			left = mid+1;
+		else 		// mid is in the monotonically decresing half
+			right = mid-1;
+	}
+}
+// this is my way but it can be improved as shown below
+
+const find_max_in_bitonic_array = function (arr){
+	let left = 0;
+	let right = arr.length-1;
+	while(left !== right){
+		mid = Math.floor((left+right)/2);
+		if(arr[mid] > arr[mid+1])
+			right = mid;
+		else
+			left = mid+1;
+	}
+	retunr arr[left];
+}
