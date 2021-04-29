@@ -286,3 +286,53 @@ const find_max_in_bitonic_array = function (arr){
 	}
 	retunr arr[left];
 }
+
+
+//Problem Challenge 1
+
+// Search in Bitonic Array
+
+
+/*Given a Bitonic array, find if a given ‘key’ is present in it. 
+An array is considered bitonic if it is monotonically increasing and then monotonically decreasing. 
+Monotonically increasing or decreasing means that for any index i in the array arr[i] != arr[i+1].
+Write a function to return the index of the ‘key’. If the ‘key’ is not present, return -1.*/
+
+const search_bitonic_array = function (arr, key){
+	let left = 0;
+	let right = arr.length-1;
+	while(left !== right){
+		mid = Math.floor((left+right)/2);
+		if(arr[mid] === key)
+			return mid;
+		if(arr[mid] > arr[mid+1])
+			right = mid;
+		else
+			left = mid+1;
+	}
+	let start = 0;
+	let end = left;
+	while(start <= end){
+		mid = Math.floor((start+end)/2);
+		if(arr[mid] === key)
+			return mid;
+		else if(key < arr[mid])
+			start = mid-1;
+		else
+			end = mid+1;
+	}
+	start = left;
+	end = arr.length-1;
+	while(start <= end){
+		mid = Math.floor((start+end)/2);
+		if(arr[mid] === key)
+			return mid;
+		else if(key < arr[mid])
+			start = mid+1;
+		else
+			end = mid-1;
+	}
+	return -1
+}
+// first find the maximum element, then do binary search for each of the increasing/decreasing part of the array
+// O(3logN) if key is in the descending half else O(2logN) if key is in the ascending half
