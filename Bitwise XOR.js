@@ -101,3 +101,26 @@ function calculate_bitwise_complement(num){
 	let all_bits_set = Math.pow(2, bit_count) - 1;
 	return num ^ all_bits_set;
 }
+
+
+// Problem Challenge 1
+
+/*Given a binary matrix representing an image, we want to flip the image horizontally, then invert it.
+To flip an image horizontally means that each row of the image is reversed. For example, flipping [0, 1, 1] horizontally results in [1, 1, 0].
+To invert an image means that each 0 is replaced by 1, and each 1 is replaced by 0. For example, inverting [1, 1, 0] results in [0, 0, 1].*/
+
+
+function flip_and_invert_image (matrix){
+	let row = matrix.length;
+	let col = matrix[0].length;
+	for(let i = 0; i < matrix.length; i++){
+		for(let j = 0; j < Math.floor((col+1)/2); j++){
+			let temp = matrix[i][j] ^ 1;
+			matrix[i][j] = matrix[i][col-1-j] ^ 1;
+			matrix[i][col-1-j] = temp;
+		}
+	}
+	return matrix;
+}
+
+// O(n) time, O(1) space;
