@@ -284,7 +284,7 @@ const find_max_in_bitonic_array = function (arr){
 		else
 			left = mid+1;
 	}
-	retunr arr[left];
+	return arr[left];
 }
 
 
@@ -369,3 +369,35 @@ const search_rotated_array = function(arr, key){
 	}
 	return -1;
 }
+
+
+// Problem Challenge 3
+// Rotation Count
+
+
+/*Given an array of numbers which is sorted in ascending order and is rotated ‘k’ times around a pivot, find ‘k’.
+You can assume that the array does not have any duplicates.*/
+
+const count_rotations = function (arr){
+	if(arr[0] < arr[arr.length-1])
+		return 0;
+	let left = 0;
+	let right = arr.length-1;
+	while(left <= right){
+		mid = Math.floor((left+right)/2);
+		if(arr[left] < arr[mid]){
+			if(arr[mid+1] < arr[mid])
+				return mid+1;
+			left = mid+1;
+		}
+		else{
+			if(arr[mid-1] > arr[mid])
+				return mid
+			right = mid-1;
+		}
+	}
+}
+
+
+// Similar Problem : Rotation count but array has duplicates
+// I will solve it later . Right now my head's hurting

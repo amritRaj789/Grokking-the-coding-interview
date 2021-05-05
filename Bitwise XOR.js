@@ -1,0 +1,53 @@
+/*XOR is a logical bitwise operator that returns 0 (false) if both bits are the same
+and returns 1 (true) otherwise. In other words, it only returns 1 if exactly one bit 
+is set to 1 out of the 2 bits in comparison.
+*/
+//It is surprising to know the approaches that the XOR operator enables us to solve certain
+//problems. 
+
+//For example: 
+
+//given an array of n-1 integers in the range from 1 to n, find the one number that is missing
+
+//usual method:
+
+function find_missing_number(arr){
+	const n = arr.length + 1;
+	let total = arr.reduce((a, b) => a+b);
+	return ((n*(n+1))/2) - total;
+}
+console.log(`Missing number is: ${find_missing_number([1, 5, 2, 6, 4])}`);
+
+//One problem with the above method is: we can get integer overflow when n is large.
+//XOR comes to the rescue.
+
+function find_missing_number(arr){
+	const n = arr.length;
+	let x = 1;
+	for(let i = 2; i <= n+1; i++){
+		x = x ^ i;
+	}
+	let y = arr[0];
+	for(let i = 1; i < n; i++){
+		y = y ^ arr[i];
+	}
+	return x ^ y;
+}
+
+// Important properties of XOR
+
+// Xor of a number with itself returns 0
+// Xor of a number with 0 returns the number itself
+// Xor is Associative i.e: (a^b)^c = a^(b^c)
+// Xor is commutative i.e: a^b = b^a
+
+// Problem 1
+// Single Number
+//In a non-empty array of integers, every number appears twice except for one, find that single number.
+
+function find_missing_number(arr){
+	let x = arr[0];
+	for(let i = 1; i < arr.length; i++)
+		x = x^arr[i];
+	return x
+}
