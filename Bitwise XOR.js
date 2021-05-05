@@ -45,9 +45,35 @@ function find_missing_number(arr){
 // Single Number
 //In a non-empty array of integers, every number appears twice except for one, find that single number.
 
-function find_missing_number(arr){
+function find_single_number(arr){
 	let x = arr[0];
 	for(let i = 1; i < arr.length; i++)
 		x = x^arr[i];
 	return x
+}
+
+
+// Problem 2
+// 2 single numbers
+
+/*In a non-empty array of numbers, every number appears exactly twice except two numbers that appear only once. 
+Find the two numbers that appear only once.
+*/
+function find_single_numbers(nums){
+	let n1xn2 = 0;
+	nums.forEach(num => n1xn2 = n1xn2^num);
+	// finding rightmost bit that is 1
+	let rightmost_bit = 1;
+	while((rightmost_bit & n1xn2) === 0){
+		rightmost_bit = rightmost_bit << 1;
+	}
+	let num1 = 0;
+	let num2 = 0;
+	nums.forEach((num) => {
+		if((num & rightmost_bit) !== 0)
+			num1 = num1 ^ num;
+		else
+			num2 = num2 ^ num;
+	})
+	return [num1, num2];
 }
