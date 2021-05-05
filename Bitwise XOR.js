@@ -77,3 +77,27 @@ function find_single_numbers(nums){
 	})
 	return [num1, num2];
 }
+
+
+// Problem 3.
+// Complement of Base 10 Number
+//For a given positive number N in base-10, 
+//return the complement of its binary representation as a base-10 integer.
+
+function calculate_bitwise_complement(n){
+	let pow2 = Math.ceil(Math.log2(n+1));
+	let num = 2 ** pow2;
+	return n ^ (num-1);
+}
+
+//other way:
+function calculate_bitwise_complement(num){
+	let bit_count = 0;
+	let n = num;
+	while(n > 0){
+		bit_count++;
+		n = n >> 1;
+	}
+	let all_bits_set = Math.pow(2, bit_count) - 1;
+	return num ^ all_bits_set;
+}
