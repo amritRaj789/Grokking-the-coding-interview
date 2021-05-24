@@ -122,6 +122,20 @@ const find_subarrays = function(arr, target) {
 	return result;
 }
 
+// The below one is much better imo. Both are my code btw
+const find_subarrays = function (arr, target){
+  let result = [];
+  for(let i = 0; i < arr.length; i++){
+    let product = 1;
+    for(let j = i; j < arr.length; j++){
+      product *= arr[j];
+      if(product < target) result.push(arr.slice(i, j+1))
+      else break;
+    }
+  }
+  return result;
+}
+
 // Dutch National Flag Problem
 const dutch_flag_sort = function(arr) {
 	let left = 0;

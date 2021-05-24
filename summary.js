@@ -1,4 +1,4 @@
-https://medium.com/hackernoon/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed
+/* https://medium.com/hackernoon/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed
 
 
 14 Patterns to Ace Any Coding Interview Question
@@ -55,8 +55,12 @@ String anagrams (hard)
 
 
 2. Two Pointers or Iterators
-Two Pointers is a pattern where two pointers iterate through the data structure in tandem until one or both of the pointers hit a certain condition. Two Pointers is often useful when searching pairs in a sorted array or linked list; for example, when you have to compare each element of an array to its other elements.
-Two pointers are needed because with just pointer, you would have to continually loop back through the array to find the answer. This back and forth with a single iterator is inefficient for time and space complexity — a concept referred to as asymptotic analysis. While the brute force or naive solution with 1 pointer would work, it will produce something along the lines of O(n²). In many cases, two pointers can help you find a solution with better space or runtime complexity.
+Two Pointers is a pattern where two pointers iterate through the data structure in tandem until one or both of the pointers hit a certain condition. 
+Two Pointers is often useful when searching pairs in a sorted array or linked list; for example, when you have to compare each element of an array to its other elements.
+Two pointers are needed because with just pointer, you would have to continually loop back through the array to find the answer. 
+This back and forth with a single iterator is inefficient for time and space complexity — a concept referred to as asymptotic analysis. 
+While the brute force or naive solution with 1 pointer would work, it will produce something along the lines of O(n²). 
+In many cases, two pointers can help you find a solution with better space or runtime complexity.
 
 Ways to identify when to use the Two Pointer method:
 It will feature problems where you deal with sorted arrays (or Linked Lists) and need to find a set of elements that fulfill certain constraints
@@ -288,4 +292,4 @@ Minimum height of a tree (hard)
 What next?
 Experiencing LeetCode fatigue? Learn these 14 patterns and you’ll have a more complete picture of how to approach a problem no matter the question.
 If you’re interested in a deeper dive through the above patterns or the example problems under each one, check out Grokking the Coding Interview: Patterns for Coding Questions. It’s the latest course in the Grokking interview series, used by 20,000+ learners to land jobs at top tech companies.
-The highest endorsement I can give it is that I really wish it was around when I was still preparing for coding interviews
+The highest endorsement I can give it is that I really wish it was around when I was still preparing for coding interviews */
