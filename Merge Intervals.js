@@ -96,7 +96,7 @@ Problem 3 Intervals Intersection
 Given 2 intervals, find the intersection of these two intervals. 
 Each list consists of disjoint intervals sorted on their start time.
 */
-
+// red red red red red red red red red red red red red red red
 function merge (intervals_a, intervals_b){
 	let result = [];
 	let p1 = 0;
@@ -104,27 +104,39 @@ function merge (intervals_a, intervals_b){
 	while(p1 < intervals_a.length && p2 < intervals_b.length){
 		const intervalA = intervals_a[p1];
 		const intervalB = intervals_b[p2];
-		if(intervalA.end < intervalB.start){
+		if(intervalA.end < intervalB.start)
 			p1++;
-		}
-		else if(intervalB.end < intervalA.start){
+		else if(intervalB.end < intervalA.start)
 			p2++;
-		}
 		else{
-			const start = Math.max(intervalA.start, intervalB.start);
-			const end = Math.min(intervalA.end, intervalB.end);
-			result.push(new Interval(start, end));
+			result.push(new Interval(Math.max(intervalA.start, intervalB.start), Math.min(intervalA.end, intervalB.end)));
 			if(intervalA.end < intervalB.end)
 				p1++;
-			else if(intervalB.end < intervalA.end)
+			else
 				p2++;
-			else{
-				p1++;
-				p2++;
-			}
 		}
 	}
 	return result;
+}
+
+// This solution is far more succinct
+function merge(intervals_a, intervals_b) {
+  let result = [];
+	let i = 0;
+  let j = 0;
+  while (i < intervals_a.length && j < intervals_b.length) {
+    a_overlaps_b = intervals_a[i].start >= intervals_b[j].start && intervals_a[i].start <= intervals_b[j].end;
+    b_overlaps_a = intervals_b[j].start >= intervals_a[i].start && intervals_b[j].start <= intervals_a[i].end;
+    if (a_overlaps_b || b_overlaps_a) {
+      result.push(new Interval(Math.max(intervals_a[i].start, intervals_b[j].start),
+        Math.min(intervals_a[i].end, intervals_b[j].end)));
+    }
+    if (intervals_a[i].end < intervals_b[j].end)
+      i += 1;
+    else
+      j += 1;
+  }
+  return result;
 }
 
 /*

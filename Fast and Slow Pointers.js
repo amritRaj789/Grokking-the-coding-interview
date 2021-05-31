@@ -18,7 +18,7 @@ const has_cycle = function(head) {
 	return false;
 }
 
-red red red red red red red red
+red red red red red red red red red red red red
 // Start of Linked List Cycle
 const find_cycle_start = function(head){
 	let length = find_cycle_length(head);
@@ -196,7 +196,8 @@ function reverse(head){
 }
 
 //Cycle in a circular array
-red red red red red red red red red red red
+//red red red red red red red red red red red
+//teal teal teal teal teal teal teal teal teal
 function circular_array_loop_exists(arr) {
   for (i = 0; i < arr.length; i++) {
     isForward = arr[i] >= 0; // if we are moving forward or not

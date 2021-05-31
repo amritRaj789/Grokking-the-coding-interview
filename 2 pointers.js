@@ -136,6 +136,7 @@ const find_subarrays = function (arr, target){
   return result;
 }
 
+// red red red red red red red red red red
 // Dutch National Flag Problem
 const dutch_flag_sort = function(arr) {
 	let left = 0;
@@ -186,6 +187,8 @@ const search_quadruplets = function(arr, target) {
 //Problem Challenge 2
 // Comparing Strings containing Backspaces (medium)
 
+
+//red red red red red red red red red red red
 const backspace_compare = function(str1, str2) {
    let stringA = "";
    let stringB = "";
@@ -203,12 +206,33 @@ const backspace_compare = function(str1, str2) {
    			stringB = stringB.slice(0, stringB.length-1);
    		}
    }
-   console.log("A : ", stringA);
-   console.log("B : ", stringB);
+   //console.log("A : ", stringA);
+   //console.log("B : ", stringB);
    return (stringA === stringB)
 };
 console.log(backspace_compare("xy#z", "xyz#"))
 
+// the solution below is more efficient as it linear time O(M+N) in this case
+const backspace_compare = function (str1, str2){
+  function nextValidIndex (str, index){
+    let backspace = 0;
+    while(index >= 0){
+      if(str[index] == '#') backspace++;
+      else if(backspace > 0) backspace--;
+      else break;
+      index--;
+    }
+    return index;
+  }
+  let p1 = nextValidIndex(str1, str1.length-1);
+  let p2 = nextValidIndex(str2, str2.length-1);
+  while(p1 >= 0 && p2 >= 0){
+    if(str1[p1] !== str2[p2]) return false;
+    p1 = nextValidIndex(str1, p1-1);
+    p2 = nextValidIndex(str2, p2-1)
+  }
+  return true;
+}
 //Problem Challenge 3
 //Given an array, find the length of the smallest subarray in it which when sorted will sort the whole array.
 const shortest_window_sort = function(arr) {
@@ -236,7 +260,7 @@ const shortest_window_sort = function(arr) {
 // The above method has O(NlogN) but we can do better than this
 
 red red red red red red red red red red
-
+teal teal teal teal teal teal teal teal teal 
 function shortest_window_sort(arr) {
   let low = 0,
     high = arr.length - 1;
