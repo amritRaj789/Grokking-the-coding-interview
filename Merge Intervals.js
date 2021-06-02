@@ -186,9 +186,27 @@ Problem Challenge 2 : Maximum CPU Load
 We are given a list of Jobs. Each job has a Start time, an End time, and a CPU load when it is running. Our goal is to find the maximum CPU load at any time if all the jobs are running on the same machine.
 
 */
-// Similar to above problem so will have to skip it for now
+function find_max_cpu_load = function (jobs){
+  let maxLoad = 0;
+  let myHeap = new MinHeap();
+  let myHeapLoad = 0;
+  jobs.sort((a, b) => a.start - b.start);
+  for(let i = 0; i < jobs.length; i++){
+    while(myHeap.length > 0 && myHeap.getMin().cpu_load <= jobs[i].start){
+      myHeapLoad -= myHeap.removeMin().cpu_load;
+    }
+    myHeap.insert(jobs[i]);
+    myHeapLoad += jobs[i].cpu_load;
+    maxLoad = Math.max(maxLoad, myHeapLoad);
+  }
+  return myHeapLoad;
+}
+// O(NlogN)
+// problem with this method is that we cannot insert an object into the Heap datastructure that we have designed.
+// but using some library we may do that with advanced heap data structure
 
 
+// red red red red red red red red red red red
 /*Problem Challenge 3: Employee Free Time (hard)
 For ‘K’ employees, we are given a list of intervals representing each employee’s working hours. Our goal is to determine if there is a free interval which is common to all employees. You can assume that each list of employee working hours is sorted on the start time.
 */
