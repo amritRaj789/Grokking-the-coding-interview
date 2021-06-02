@@ -89,6 +89,7 @@ function insert(intervals, new_interval) {
   return merged;
 }
 
+// you can simply insert it first and then merge all intervals
 
 /*
 Problem 3 Intervals Intersection
@@ -158,8 +159,27 @@ Problem Challenge 1 : Minimum Meeting Rooms
 Given a list of intervals representing the start and end time of "N" meetings, find the minimum number of rooms required to hold all the meetings.
 */
 
-// Have skipped it for now. Gotta learn Heaps for this one first
+// Here I have used the MinHeap class and its methods.
+function min_meeting_rooms(meetings){
+  meetings.sort((a, b) => a.start - b.start);
+  let minRooms = -Infinity;
+  let myHeap = new MinHeap(34);
+  for(let i = 0; i < meetings.length; i++){
+    if(myHeap.length == 0){
+      myHeap.push(meetings[i].end);
+    }
+    else{
+      while(myHeap.length > 0 && myHeap.getMin() <= meetings[i].start){
+        myHeap.removeMin();
+      }
+      myHeap.insert(meetings[i].end);
+    }
+    minRooms = Math.max(minRooms, myHeap.length);
+  }
+  return minRooms;
+}
 
+// I also want to add a solution which doesnt use Heap
 
 /*
 Problem Challenge 2 : Maximum CPU Load
