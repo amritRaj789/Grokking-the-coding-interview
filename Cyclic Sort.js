@@ -85,19 +85,25 @@ We are given an unsorted array containing ‘n+1’ numbers taken from the range
 Find that duplicate number without using any extra space. You are, however, allowed to modify the input array.
 */
 
-const find_duplicate = function (nums){
-	let i = 0;
-	while(i < nums.length){
-		while(nums[i] !== i+1){
-			if(nums[i] === nums[nums[i] - 1])
-				return nums[i];
-			const temp = nums[nums[i] - 1];
-			nums[nums[i] - 1]  = nums[i];
-			nums[i] = temp;
+const find_duplicate = function(nums){
+	for(let i = 0 ; i < nums.length; i++){
+		let j = nums[i] - 1;
+		if(nums[i] !== i+1){
+			if(nums[i] == nums[j]) return nums[i];
+			else{
+				[nums[i], nums[j]] = [nums[j], nums[i]];
+				i--;
+			}
 		}
-		i++;
 	}
 }
+// O(N) time and O(1) space
+
+
+// there is also a way to solve it in O(N) without modifying the array
+// we have to use fast and slow pointers
+
+// I am yet to work it out though
 
 /*
 Problem 4: Find all Duplicate Numbers
@@ -152,23 +158,19 @@ Given an unsorted array containing numbers, find the smallest missing positive n
 
 */
 
-const find_first_smallest_missing_positive = function(nums) {
-  for(let i = 0; i < nums.length; i++){
-  	if((0 <= nums[i]) (nums[i] < nums.length) && (nums[i] !== i)){
-  		const temp = nums[nums[i]];
-  		nums[nums[i]] = nums[i];
-  		nums[i] = temp;
-  		i = i-1;
-  	}
-  }
-  let j = 1;
-  while(j < nums.length){
-  	if(nums[j] !== j)
-  		return j
-  	j++;
-  }
-  return j;
-};
+const find_first_smallest_missing_positive = function (nums){
+	for(let i = 0; i < nums.length; i++){
+		let j = nums[i]-1;
+		if(nums[i] > 0 && nums[i] <= nums.length && nums[i] !== nums[j]){
+			[nums[i], nums[j]] = [nums[j], nums[i]];
+			i--;
+		}
+	}
+	for(let i = 0; i < nums.length; i++){
+		if(nums[i] !== i+1) return i+1;
+	}
+	return nums.length+1;
+}
 
 
 /*
@@ -176,7 +178,8 @@ Problem Challenge 3:
 Given an unsorted array containing numbers and a number ‘k’, find the first ‘k’ missing positive numbers 
 in the array.
 */
-red red red red red red red
+//red red red red red red red red red red red
+//cyan cyan cyan cyan cyan cyan cyan cyan cyan
 const find_first_k_missing_positive = function(nums, k) {
 	let i = 0;
 	while(i < nums.length){

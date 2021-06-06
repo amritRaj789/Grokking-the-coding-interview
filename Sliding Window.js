@@ -114,8 +114,7 @@ const length_of_longest_substring = function (arr, k) {
   return maxLength;
 };
 
-
-red red red red red red red red red red red 
+//red red red red red red red red red red red
 //Problem Challenge 1
 const find_permutation = function (str, pattern) {
   let hash1 = {};
