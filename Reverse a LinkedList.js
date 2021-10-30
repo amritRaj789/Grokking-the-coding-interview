@@ -50,80 +50,49 @@ const reverse_sub_list = function(head, p, q) {
 };
 // won't work if p = 1
 
-/*
-Reverse every K-element Sub-list 
+
+
+/* 
+red red red red red red red red red red red red red red
+Problem Challenge 1
+
+Reverse every alternating K-element Sub-list 
 Given the head of a LinkedList and a number ‘k’, reverse every ‘k’ sized sub-list starting from the head.
 If, in the end, you are left with a sub-list with less than ‘k’ elements, reverse it too
-*/const reverse_every_k_elements = function(head, k) {
-  let copyLink = head;
-  let count = 0;
+*/
+const reverse_alternate_k_elements = function(head, k) {
   let current = head;
-  while(current !== null){
-  	let i = k;
-  	let prev = null;
-  	let copyLink2 = current;
-  	while(i > 0 && current !== null){
-		let temp = current.next;
-	  	current.next = prev;
-	  	prev = current;
-	  	current = temp;
-	  	i--;
-  	}
-  	count++;
-  	if(count === 1){
-  		head = prev;
-  	}
-  	if(count >= 2){
-  		copyLink.next = prev;
-  		copyLink = copyLink2;
-  	}
+  let prev = null;
+  let copyLink1;
+  let copyLink2;
+  let i = 0;
+  while(current){
+    let count = k;
+    copyLink2 = current;
+    while(count > 0 && current){
+      temp = current.next;
+      current.next = prev;
+      prev = current;
+      current = temp;
+      count--;
+    }
+    if(i == 0){
+      head = prev;
+      i++;
+    }
+    else copyLink1.next = prev;
+    copyLink2.next = current;
+    count = k;
+    while(count > 1 && current){
+      current = current.next;
+      count--;
+    }
+    copyLink1 = current;
+    current = current.next;
   }
   return head;
-}
-
-// Problem Challenge 1
-
-/*Reverse alternating K-element Sub-list
-
-Given the head of a LinkedList and a number ‘k’, reverse every alternating ‘k’ sized sub-list starting from the head.
-If, in the end, you are left with a sub-list with less than ‘k’ elements, reverse it too.
-*/
-
-const reverse_alternate_k_elements = function(head, k) {
-  
-	let current = head;
-	let copyLink;
-	let count = 0;
-	let copyLink2;
-	let i;
-	while(current !== null){
-		i = k;
-		let prev = null;
-		copyLink = current;
-		while(i > 0 && current !== null){
-			let temp = current.next;
-			current.next = prev;
-			prev = current;
-			current = temp;
-			i--;
-		}
-		count++;
-		if(count === 1)
-			head = prev;
-		copyLink.next = current;
-		if(count >= 2){
-			copyLink2.next = prev;
-		}
-		i = k;
-		while(i > 1 && current !== null){
-			current = current.next;
-			i--;
-		}
-		copyLink2 = current;
-		current = (current === null) ? current : current.next;
-	}
-	return head;
 };
+
 
 /*Problem Challenge 2
 

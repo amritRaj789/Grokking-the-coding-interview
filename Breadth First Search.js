@@ -125,6 +125,7 @@ const traverse = function(root) {
 	bfs(root, 1);
 	return result
 }
+
 function findHeight(root){
 	let maxHeight = 0;
 	function recursive(node, l){

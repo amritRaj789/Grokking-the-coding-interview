@@ -1,3 +1,98 @@
+/*DFS traversal has 3 types: preorder, inorder and postorder
+commonly by only "DFS" we mean the preorder one
+
+// Preorder recursive
+
+function preorder (root){
+	let result = [];
+	let stack = [root];
+	function dfs(node){
+		result.push(node.val);
+		if(node.left) dfs(node.left);
+		if(node.right) dfs(node.right);
+	}
+	dfs(root);
+	return result;
+}
+
+
+// Preorder iterative
+function preorder (root){
+	let result = [];
+	let stack = [root];
+	while(stack.length){
+		let node = stack.pop();
+		result.push(node.val);
+		if(node.right) stack.push(node.right);
+		if(node.left) stack.push(node.left);
+	}
+	return result;
+}
+
+// Inorder recursive
+function inorder (root){
+	let result = [];
+	function dfs(node){
+		if(node.left) dfs(node.left);
+		result.push(node.val);
+		if(node.right) dfs(node.right);
+	}
+	dfs(root);
+	return result;
+}
+
+
+// Inorder iterative
+function inorder (root){
+	let stack = [];
+	let current = root;
+	let result = [];
+	while(true){
+		if(current){
+			stack.push(current);
+			current = current.left;
+		}
+		else if(stack.length){
+			current = stack.pop();
+			result.push(current.val);
+			current = current.right;
+		}
+		else break;
+	}
+	return result;
+}
+
+
+// PostOrder recursive
+function postorder (root){
+	let result = [];
+	function dfs(node){
+		if(node.left) dfs(node.left);
+		if(node.right) dfs(node.right);
+		result.push(node.val);
+	}
+	dfs(root);
+	return result;
+}
+
+
+// PostOrder iterative
+function postorder (root){
+	let s1 = [root];
+	let s2 = [];
+	let result = [];
+	while(s1.length){
+		let node = s1.pop();
+		s2.push(node.val);
+		if(node.left) s1.push(node.left);
+		if(node.right) s1.push(node.right);
+	}
+	return result;
+}
+*/
+
+
+
 /*Problem 1
 Binary Tree Path Sum
 Given a binary tree and a number ‘S’, find if the tree has a path from root-to-leaf
