@@ -147,29 +147,30 @@ const dutch_flag_sort = function (arr) {
 
 // Problem Challenge 1
 const search_quadruplets = function (arr, target) {
-  let quadruplets = [];
+  let result = [];
   arr.sort((a, b) => a - b);
+  let left;
+  let right;
+  let sum;
   for (let i = 0; i < arr.length - 3; i++) {
-    if (i > 1 && arr[i] === arr[i - 1]) continue;
+    if (i > 0 && arr[i] == arr[i - 1]) continue;
     for (let j = i + 1; j < arr.length - 2; j++) {
-      if (j > i + 2 && arr[j] === arr[j - 1]) continue;
-      let left = j + 1;
-      let right = arr.length - 1;
+      if (j > i + 1 && arr[j] == arr[j - 1]) continue;
+      left = j + 1;
+      right = arr.length - 1;
       while (left < right) {
         sum = arr[i] + arr[j] + arr[left] + arr[right];
         if (sum < target) left++;
         else if (sum > target) right--;
         else {
-          quadruplets.push([arr[i], arr[j], arr[left], arr[right]]);
-          left++;
-          right--;
+          result.push([arr[i], arr[j], arr[left++], arr[right--]]);
+          while (left < right && arr[left] == arr[left - 1]) left++;
         }
       }
     }
   }
-  return quadruplets;
+  return result;
 };
-
 //Problem Challenge 2
 // Comparing Strings containing Backspaces (medium)
 
