@@ -61,16 +61,18 @@ const fruits_into_baskets = function (fruits) {
 };
 
 const non_repeat_substring = function (str) {
-  let charFreq = {};
-  let start = 0;
-  let maxLength = -Infinity;
-  for (let end = 0; end < str.length; end++) {
-    if (!(str[end] in charFreq)) charFreq[str[end]] = end;
-    else {
-      start = charFreq[str[end]] + 1;
-      charFreq[str[end]] = end;
+  let maxLength = 0;
+  let left = 0;
+  let right = 0;
+  let hash = {};
+  for (right = 0; right < str.length; right++) {
+    if (str[right] in hash) {
+      while (left <= hash[str[right]]) {
+        delete hash[str[left++]];
+      }
     }
-    maxLength = Math.max(maxLength, end - start + 1);
+    hash[str[right]] = right;
+    maxLength = Math.max(maxLength, right - left + 1);
   }
   return maxLength;
 };
